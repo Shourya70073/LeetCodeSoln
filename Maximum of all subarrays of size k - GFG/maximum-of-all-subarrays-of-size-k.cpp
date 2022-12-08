@@ -35,7 +35,7 @@ class Solution
             return ans;
         }
        
-        if(k==n){
+        else if(k==n){
             int temp=INT_MIN;
            for(int i=0;i<n;i++){
               if(nums[i]>temp){
@@ -45,8 +45,8 @@ class Solution
            ans.push_back(temp);
            return ans;
         }
-
-       for(int i=0;i<k;i++){
+else{
+  for(int i=0;i<k;i++){
          if(nums[i]>maxi){
              maxi=nums[i];
          }
@@ -82,7 +82,9 @@ class Solution
        }
 
 
-        return ans;
+        return ans;  
+}
+       
     }
 };
 
