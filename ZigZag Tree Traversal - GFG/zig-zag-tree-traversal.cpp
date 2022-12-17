@@ -105,43 +105,41 @@ class Solution{
     //Function to store the zig zag order traversal of tree in a list.
     vector <int> zigZagTraversal(Node* root)
     {
-    	if(root==nullptr){
-            vector<int>t;
-            return t;
-        }
-        vector<vector<int>>ans;
-        queue<Node *>qt;
-        int flag=0;
-        qt.push(root);
-        while(!qt.empty()){
-            
-            vector<int>t;
-            int s=qt.size();
-            for(int i=0;i<s;i++){
-                Node *temp=qt.front();
-               
-                if(temp->left!=nullptr){
-                    qt.push(temp->left);
-                }
-                if(temp->right!=nullptr){
-                    qt.push(temp->right);
-                }
-                t.push_back(temp->data);
-                 qt.pop();
-            }
-            if(flag%2!=0){
-                reverse(t.begin(),t.end());
-            }
-            ans.push_back(t);
-            flag++;
-             }
-       vector<int>p;
-       for(auto i:ans){
-           for(auto j:i){
-               p.push_back(j);
-           }
+       if(root==nullptr){
+           vector<int>t;
+           return t;
        }
-       return p;
+       int flag=1;
+       queue<Node*>qt;
+       qt.push(root);
+       vector<int>fans;
+       
+       while(!qt.empty()){
+           int s=qt.size();
+           vector<int>ans(s);
+           for(int i=0;i<s;i++){
+               Node *temp=qt.front();
+               int d=temp->data;
+               qt.pop();
+               
+               int index=flag?i:s-i-1;
+               ans[index]=d;
+               if(temp->left!=nullptr){
+                   qt.push(temp->left);
+               }
+               if(temp->right!=nullptr){
+                   qt.push(temp->right);
+               }
+               
+           }
+           for(auto i:ans){
+               fans.push_back(i);
+           }
+           flag=!flag;
+           
+           
+       }
+       return fans;
     }
 };
 
