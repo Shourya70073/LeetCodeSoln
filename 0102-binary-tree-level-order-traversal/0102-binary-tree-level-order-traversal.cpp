@@ -16,27 +16,28 @@ public:
             vector<vector<int>>t;
             return t;
         }
-        vector<vector<int>>ans;
-        queue<TreeNode *>qt;
+        vector<vector<int>>fans;
+        queue<TreeNode*>qt;
         qt.push(root);
+        
         while(!qt.empty()){
-            
-            vector<int>t;
-            int s=qt.size();
-            for(int i=0;i<s;i++){
+            vector<int>ans;
+            int size=qt.size();
+            for(int i=0;i<size;i++){
                 TreeNode *temp=qt.front();
-               
+                int d=temp->val;
+                ans.push_back(d);
+                qt.pop();
                 if(temp->left!=nullptr){
                     qt.push(temp->left);
                 }
                 if(temp->right!=nullptr){
                     qt.push(temp->right);
                 }
-                t.push_back(temp->val);
-                 qt.pop();
             }
-            ans.push_back(t);
-             }
-        return ans;
+            fans.push_back(ans);
+        }
+        return fans;
+        
     }
 };
