@@ -16,17 +16,22 @@ public:
             vector<int>t;
             return t;
         }
-        int d=root->val;
+        stack<TreeNode *>st;
+        st.push(root);
         vector<int>ans;
-        ans.push_back(d);
-        vector<int>ans1=preorderTraversal(root->left);
-        vector<int>ans2=preorderTraversal(root->right);
-        for(auto i:ans1){
-            ans.push_back(i);
-        }
-        for(auto i:ans2){
-            ans.push_back(i);
+        while(!st.empty()){
+            TreeNode *temp=st.top();
+            st.pop();
+            int d=temp->val;
+            ans.push_back(d);
+            if(temp->right!=nullptr){
+                st.push(temp->right);
+            }
+            if(temp->left!=nullptr){
+                st.push(temp->left);
+            }
         }
         return ans;
+        
     }
 };
