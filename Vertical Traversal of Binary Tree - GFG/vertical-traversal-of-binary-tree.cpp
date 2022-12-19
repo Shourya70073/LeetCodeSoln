@@ -113,7 +113,9 @@ class Solution
        
        
        while(!qt.empty()){
-           pair<Node *,pair<int,int>>temp=qt.front();
+           int s=qt.size();
+           for(int i=0;i<s;i++){
+        pair<Node *,pair<int,int>>temp=qt.front();
            qt.pop();
            Node *r=temp.first;
            int hd=temp.second.first;
@@ -125,6 +127,8 @@ class Solution
            if(r->right){
                qt.push({r->right,{hd+1,lvl+1}});
            }
+           }
+           
        }
        
        for(auto i:map){
