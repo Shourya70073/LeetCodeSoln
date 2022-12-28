@@ -21,8 +21,9 @@ public:
             return root;
         }
         else{
-              root->left=insertIntoBST(root->left,val);
+            root->left=insertIntoBST(root->left,val);
             return root;
         }
+        
     }
 };
