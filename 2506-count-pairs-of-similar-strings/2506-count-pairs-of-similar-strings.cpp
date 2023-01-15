@@ -5,17 +5,17 @@ public:
         for(auto s:words){
             set<int> st;
             for(char c:s){
-                st.insert(c);// it finds all the unique character in a string store it to set
+                st.insert(c);
             }
             
-            mp[st]++;//above set is maped here 
-                     // i.e. counting number of string contain these unique characters 
+            mp[st]++;
+                    
         }
         int res=0;
         for(auto p:mp){
             if(p.second>1){
                 int n=p.second;
-                res = res + (n*(n-1))/2; // here just counting number of pair possible (it's simple mathematics)
+                res = res + (n*(n-1))/2; 
             }
         }
         return res;
