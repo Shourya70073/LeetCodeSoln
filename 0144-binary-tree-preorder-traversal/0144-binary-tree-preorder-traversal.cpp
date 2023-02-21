@@ -13,20 +13,21 @@ class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         if(root==nullptr){
-            vector<int>t;
-            return t;
+            vector<int>temp;
+            return temp;
         }
+        
         int d=root->val;
-        vector<int>ans;
-        ans.push_back(d);
         vector<int>ans1=preorderTraversal(root->left);
         vector<int>ans2=preorderTraversal(root->right);
+        vector<int>fans;
+        fans.push_back(d);
         for(auto i:ans1){
-            ans.push_back(i);
+            fans.push_back(i);
         }
         for(auto i:ans2){
-            ans.push_back(i);
+            fans.push_back(i);
         }
-        return ans;
+        return fans;
     }
 };
