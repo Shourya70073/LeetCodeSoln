@@ -11,31 +11,39 @@
  */
 class Solution {
 public:
-    int height(TreeNode* root) {
+    pair<int,int> check(TreeNode *root){
         if(root==nullptr){
-            return 0;
+           pair<int,int>temp={1,0};
+            return temp;
         }
-        int l=height(root->left);
-        int r=height(root->right);
-        return 1+max(l,r);
-    }
-    
-    bool isBalanced(TreeNode* root) {
-        if(root==nullptr){
-            return 1;
-        }
-        bool b=isBalanced(root->left);
-        bool c=isBalanced(root->right);
-        if(b&&c){
-            int left=height(root->left);
-            int right=height(root->right);
-            if(abs(left-right)<=1){
-                return true;
+        
+        pair<int,int>p1=check(root->left);
+        pair<int,int>p2=check(root->right);
+        pair<int,int>ans;
+        if(p1.first && p2.first){
+            if(abs(p1.second-p2.second)<=1)
+            {
+                pair<int,int>ans;
+                ans.first=1;
+                ans.second=1+max(p1.second,p2.second);
+                return ans;
             }
-            return false;
+            else{
+                pair<int,int>ans;
+                ans.first=0;
+                ans.second=1+max(p1.second,p2.second);
+                return ans;
+            }
         }
         else{
-            return 0;
+          pair<int,int>ans;
+                ans.first=0;
+                ans.second=1+max(p1.second,p2.second);
+                return ans;
         }
+    }
+    bool isBalanced(TreeNode* root) {
+        pair<int,int>p1=check(root);
+        return p1.first;
     }
 };
