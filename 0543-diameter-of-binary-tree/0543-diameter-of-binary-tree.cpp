@@ -11,26 +11,24 @@
  */
 class Solution {
 public:
-    
-    int maxDepth(TreeNode* root) {
+    pair<int,int> findo(TreeNode *root){
         if(root==nullptr){
-            return 0;
+          pair<int,int>p={0,0};
+          return p;
         }
-        int l=maxDepth(root->left);
-        int r=maxDepth(root->right);
-        return 1+max(l,r);
-    }
-    
-    int diameterOfBinaryTree(TreeNode* root) {
-        if(root==nullptr){
-            return 0;
-        }
-        int ans1=diameterOfBinaryTree(root->left);
-        int ans2=diameterOfBinaryTree(root->right);
-        int l=maxDepth(root->left);
-        int d=maxDepth(root->right);
-        int s=l+d;
-        return max(s,max(ans1,ans2));
         
+        pair<int,int>p1=findo(root->left);
+        pair<int,int>p2=findo(root->right);
+        pair<int,int>ans;
+        int h=max(p1.first,p2.first)+1;
+        int d=max(p1.first+p2.first,max(p1.second,p2.second));
+        ans.first=h;
+        ans.second=d;
+        return ans;
+       
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        pair<int,int>p1=findo(root);
+        return p1.second;
     }
 };
