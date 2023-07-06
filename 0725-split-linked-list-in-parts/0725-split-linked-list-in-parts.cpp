@@ -56,13 +56,13 @@ public:
                     ListNode *ns=ans;
                     int count=0;
                    
-                    while(temp!=nullptr && count<numberOfParts){
+                    while(count<numberOfParts){
                     ans->next=new ListNode(temp->val);
                         temp=temp->next;
                         ans=ans->next;
                         count++;
                       }
-                   if (extra > 0 && temp != nullptr) {
+ if (extra > 0 ) {
     ans->next = new ListNode(temp->val);
     temp = temp->next;
     ans = ans->next;
