@@ -1,21 +1,40 @@
 class Solution {
 public:
-    int rob(vector<int>& nums) {
-    vector<int> dp(nums.size(), 0);
-        if(nums.size()==1){
+    int robbyRec(vector<int>&nums,int index){
+        if(index<0){
+            return 0;
+        }
+        if(index==0){
             return nums[0];
         }
-    dp[0] = nums[0];
-    dp[1] = max(nums[1], nums[0]);
-    
-    for(int i = 2; i < nums.size(); i++) {
-        int pick = nums[i] + dp[i-2];
-        int notPick = dp[i-1];
         
-        dp[i] = max(pick, notPick);
+        int pick=nums[index]+robbyRec(nums,index-2);
+        int notPick=0+robbyRec(nums,index-1);
+        
+        return max(pick,notPick);
     }
-    
-    return dp[nums.size()-1];
-}
-
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>dp(n,0);
+        if(n==1){
+            return nums[0];
+        }
+        if(n==2){
+            return max(nums[0],nums[1]);
+        }
+        dp[0]=nums[0];
+        dp[1]=max(nums[1],nums[0]);
+        for(int i=2;i<n;i++){
+            
+            int pick=INT_MIN;
+            int notpick=INT_MIN;
+            
+            if(i-2>=0){
+                pick=nums[i]+dp[i-2];
+            }
+        notpick=0+dp[i-1];
+            dp[i]=max(pick,notpick);
+        }
+        return dp[n-1];
+    }
 };
